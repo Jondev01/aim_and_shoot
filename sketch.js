@@ -6,16 +6,13 @@ let height= 400;
 
 function setup() {
   createCanvas(600,400);
-  player = new Player(width/2, height/2);
-  enemy = new Enemy();
   game = new Game();
 }
 
 function draw() {
   background(40);
-  player.update();
-  enemy.show();
-  player.show();
+  game.update();
+  game.show();
 }
 
 function mousePressed(){

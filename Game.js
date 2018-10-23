@@ -1,7 +1,8 @@
 class Game{
   constructor(){
     this.player = new Player(width/2, height/2);
-    this.enemies = [];
+    this.enemies = [new Enemy()];
+    this.state = new StateManager(this.player, this.enemies);
   }
 
   update(){
@@ -9,6 +10,8 @@ class Game{
     for(let enemy of this.enemies){
       enemy.update();
     }
+    this.state.update();
+    this.generateEnemies();
   }
 
   show(){
@@ -22,6 +25,11 @@ class Game{
     if(mouseButton === LEFT){
       this.player.shoot();
     }
+  }
+
+  generateEnemies(){
+    if(random(1) <= 0.01)
+      this.enemies.push(new Enemy());
   }
 
 }
