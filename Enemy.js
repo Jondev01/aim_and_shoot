@@ -2,21 +2,29 @@ class Enemy{
   constructor(hp = 10){
     this.w = 20;
     this.h = 20;
-    this.pos = createVector(this.w/2+random(width-this.w/2),
-      this.h/2+random(height-this.h/2));
+    this.age = 0;
+    this.pos = createVector(this.w/2+random(width-this.w),
+      this.h/2+random(height-this.h));
     this.hp = hp;
     this.weapon = new Weapon(1);
     this.dead = false;
+    this.shootTimer = 0;
   }
 
   update(){
-
+    this.age ++;
+    if(this.shootTimer > 0)
+      this.shootTimer--;
   }
 
   show(){
     push();
     fill(255,0,0, 90);
-    stroke(255);
+    if(this.shootTimer > 0){
+      strokeWeight(3);
+      stroke(255,255,0);
+    }
+    else stroke(255);
     rectMode(CENTER);
     rect(this.pos.x, this.pos.y, this.w, this.h);
     pop();
@@ -36,6 +44,10 @@ class Enemy{
   }
 
   shoot(){
-
+    if(this.age > 30 && random(1) < 0.01){
+      this.shootTimer += 10;
+      return true;
+    }
+    return false;
   }
 }

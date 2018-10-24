@@ -16,8 +16,10 @@ class StateManager{
         let enemy = this.enemies[i];
         if(enemy.contains(player.pos)){
           enemy.reduceHP(player.weapon.power);
-          if(enemy.dead)
+          if(enemy.dead){
+            this.player.score++;
             this.enemies.splice(i,1);
+          }
         }
       }
       player.shooting = false;
